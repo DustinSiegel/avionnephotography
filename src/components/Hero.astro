@@ -1,0 +1,141 @@
+---
+---
+
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <!-- Background Image Carousel -->
+  <div class="absolute inset-0 z-0">
+    <div id="hero-carousel" class="relative w-full h-full">
+      <!-- Slide 1 - ACTIVE by default -->
+      <div class="carousel-slide active absolute inset-0 transition-opacity duration-1000">
+        <img 
+          src="/images/portfolio/hero-1.jpg" 
+          alt="Luxury real estate photography" 
+          class="w-full h-full object-cover"
+        />
+        <div class="slide-overlay absolute inset-0 bg-black"></div>
+      </div>
+      
+      <!-- Slide 2 - Hidden initially -->
+      <div class="carousel-slide absolute inset-0 transition-opacity duration-500 opacity-0">
+        <img 
+          src="/images/portfolio/hero-2.jpg" 
+          alt="Luxury real estate photography" 
+          class="w-full h-full object-cover"
+        />
+        <div class="slide-overlay absolute inset-0 bg-black"></div>
+      </div>
+      
+      <!-- Slide 3 - Hidden initially -->
+      <div class="carousel-slide absolute inset-0 transition-opacity duration-500 opacity-0">
+        <img 
+          src="/images/portfolio/hero-3.jpg" 
+          alt="Luxury real estate photography" 
+          class="w-full h-full object-cover"
+        />
+        <div class="slide-overlay absolute inset-0 bg-black"></div>
+      </div>
+      
+      <!-- Slide 4 - Hidden initially -->
+      <div class="carousel-slide absolute inset-0 transition-opacity duration-500 opacity-0">
+        <img 
+          src="/images/portfolio/hero-4.jpg" 
+          alt="Luxury real estate photography" 
+          class="w-full h-full object-cover"
+        />
+        <div class="slide-overlay absolute inset-0 bg-black"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 text-center px-6 max-w-5xl">
+    <h1 class="text-5xl md:text-7xl font-light tracking-wide text-background mb-6">
+      Luxury Real Estate Photography
+    </h1>
+    <p class="text-xl md:text-2xl text-background mb-4 opacity-90">
+      Exceptional Quality. Professional Results. Unbeatable Value.
+    </p>
+    <p class="text-lg text-background mb-10 opacity-80">
+      Serving Northern New Jersey
+    </p>
+    
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <a 
+        href="https://book.avionnephotography.com" 
+        class="bg-accent text-primary px-10 py-4 rounded text-lg font-semibold hover:bg-opacity-90 transition-all duration-300 hover:scale-105 shadow-xl"
+      >
+        Book Your Shoot
+      </a>
+      <a 
+        href="#services" 
+        class="border-2 border-background text-background px-10 py-4 rounded text-lg font-semibold hover:bg-background hover:text-primary transition-all duration-300"
+      >
+        View Services
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+    <a href="#services" class="text-background animate-bounce block">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </a>
+  </div>
+</section>
+
+<script>
+  // Image carousel functionality
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.carousel-slide');
+  const totalSlides = slides.length;
+
+  function nextSlide() {
+    // Fade out current slide
+    slides[currentSlide].classList.remove('active');
+    slides[currentSlide].classList.add('opacity-0');
+    
+    // Move to next slide
+    currentSlide = (currentSlide + 1) % totalSlides;
+    
+    // Fade in next slide and start brightness animation
+    slides[currentSlide].classList.remove('opacity-0');
+    slides[currentSlide].classList.add('active');
+    
+    // Trigger the brightness animation on the new slide's overlay
+    const overlay = slides[currentSlide].querySelector('.slide-overlay');
+    if (overlay) {
+      // Remove and re-add animation to restart it
+      overlay.style.animation = 'none';
+      setTimeout(() => {
+        overlay.style.animation = 'brighten 6s ease-out forwards';
+      }, 10);
+    }
+  }
+
+  // Start the brightness animation on first slide
+  const firstOverlay = slides[0].querySelector('.slide-overlay');
+  if (firstOverlay) {
+    firstOverlay.style.animation = 'brighten 6s linear forwards';
+  }
+
+  // Change slide every 6 seconds
+  setInterval(nextSlide, 6000);
+</script>
+
+<style>
+  .carousel-slide.active {
+    opacity: 1;
+  }
+
+  /* Brightness animation: 30% brightness (70% dark) to 100% brightness (0% dark) */
+  @keyframes brighten {
+    0% {
+      opacity: 0.7; /* 30% brightness = 70% overlay */
+    }
+    100% {
+      opacity: 0; /* 100% brightness = no overlay */
+    }
+  }
+</style>

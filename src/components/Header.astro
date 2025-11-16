@@ -1,0 +1,58 @@
+---
+---
+
+<header class="bg-primary text-background py-4 px-6 sticky top-0 z-50 shadow-lg">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <a href="/" class="flex items-center gap-3">
+     <img src="./images/logo.png" alt="Avionne Photography" class="h-16 w-auto" />
+    </a>
+    
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="/#services" class="hover:text-accent transition-colors duration-300">Services</a>
+      <a href="/#coverage" class="hover:text-accent transition-colors duration-300">Coverage</a>
+      <a href="/prep-checklist" class="hover:text-accent transition-colors duration-300">Client Prep</a>
+      <a 
+        href="https://book.avionnephotography.com" 
+        class="bg-accent text-primary px-6 py-2 rounded font-semibold hover:bg-opacity-90 transition-all duration-300 hover:scale-105"
+      >
+        Book Now
+      </a>
+    </nav>
+
+    <!-- Mobile menu button -->
+    <button 
+      id="mobile-menu-button"
+      class="md:hidden text-accent focus:outline-none"
+      aria-label="Toggle menu"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav 
+    id="mobile-menu" 
+    class="hidden md:hidden mt-4 pb-4 flex flex-col gap-4"
+  >
+    <a href="/#services" class="hover:text-accent transition-colors duration-300">Services</a>
+    <a href="/#coverage" class="hover:text-accent transition-colors duration-300">Coverage</a>
+    <a href="/prep-checklist" class="hover:text-accent transition-colors duration-300">Client Prep</a>
+    <a 
+      href="https://book.avionnephotography.com" 
+      class="bg-accent text-primary px-6 py-2 rounded font-semibold text-center hover:bg-opacity-90 transition-all duration-300"
+    >
+      Book Now
+    </a>
+  </nav>
+</header>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+</script>

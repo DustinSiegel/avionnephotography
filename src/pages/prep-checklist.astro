@@ -1,0 +1,309 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const checklistItems = [
+  {
+    category: "Interior Preparation",
+    items: [
+      "Turn on all lights in every room, including lamps, overhead lights, and accent lighting",
+      "Open all curtains and blinds to maximize natural light",
+      "Remove all personal items from countertops, tables, and visible surfaces",
+      "Hide trash cans, cleaning supplies, and pet items",
+      "Make all beds with fresh linens and arrange pillows neatly",
+      "Remove refrigerator magnets, photos, and personal items",
+      "Clear kitchen and bathroom counters completely",
+      "Hide all electrical cords and cables when possible",
+      "Remove small area rugs if they detract from flooring",
+      "Ensure all toilets are closed and bathrooms are spotless"
+    ]
+  },
+  {
+    category: "Exterior Preparation",
+    items: [
+      "Mow lawn and edge all walkways and driveways",
+      "Trim bushes and trees, especially near windows",
+      "Remove garden hoses, tools, and outdoor toys",
+      "Clean or hide trash bins and recycling containers",
+      "Sweep porches, patios, and walkways",
+      "Remove cars from driveway and street in front of property",
+      "Power wash siding if needed (at least 2 days before shoot)",
+      "Ensure pool area is clean with furniture arranged neatly",
+      "Remove seasonal decorations unless specifically requested",
+      "Check that house numbers are visible and clean"
+    ]
+  },
+  {
+    category: "Day of Shoot",
+    items: [
+      "Complete all preparation at least 30 minutes before photographer arrival",
+      "Turn on all interior and exterior lights",
+      "Adjust thermostat to comfortable temperature",
+      "Turn off all ceiling fans (they blur in photos)",
+      "Turn off all TVs and computer monitors",
+      "Close all toilet lids",
+      "Arrange furniture to create clear pathways",
+      "Pets should be removed from property during shoot",
+      "Have keys or access codes ready for locked areas",
+      "Be available by phone but not necessarily on-site"
+    ]
+  },
+  {
+    category: "Special Considerations",
+    items: [
+      "For twilight shoots: exterior lights should be functional and bulbs replaced if needed",
+      "For drone shoots: ensure property boundaries are clear and accessible",
+      "For video shoots: plan for minimal noise (turn off HVAC if weather permits)",
+      "For virtual staging: rooms should be completely empty and well-lit",
+      "Notify photographer of any hazards (aggressive dogs nearby, low ceilings, etc.)"
+    ]
+  }
+];
+---
+
+<Layout 
+  title="Property Preparation Checklist | Avionne Photography"
+  description="Complete preparation checklist to ensure your property looks its best for professional real estate photography"
+>
+  <Header />
+  
+  <main class="py-12 px-6 bg-background min-h-screen">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header Section -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-light text-primary mb-4">
+          Property Preparation Checklist
+        </h1>
+        <p class="text-xl text-gray-600 mb-6">
+          Follow this guide to ensure your property photographs beautifully
+        </p>
+        
+        <!-- Download Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <button 
+            id="download-pdf-btn"
+            class="bg-accent text-primary px-8 py-3 rounded font-semibold hover:bg-opacity-90 transition-all duration-300 hover:scale-105 shadow-lg"
+          >
+            📥 Download PDF Checklist
+          </button>
+          <button 
+            onclick="window.print()"
+            class="border-2 border-primary text-primary px-8 py-3 rounded font-semibold hover:bg-primary hover:text-background transition-all duration-300"
+          >
+            🖨️ Print Checklist
+          </button>
+        </div>
+      </div>
+
+      <!-- Checklist Content -->
+      <div class="bg-white rounded-lg shadow-lg p-8 mb-8" id="checklist-content">
+        <div class="mb-8 pb-6 border-b-2 border-accent">
+          <div class="text-2xl font-light tracking-[0.2em] text-accent mb-2">
+            AVIONNE
+          </div>
+          <p class="text-sm text-gray-600">Property Preparation Guide</p>
+        </div>
+
+        {checklistItems.map((section) => (
+          <div class="mb-10">
+            <h2 class="text-2xl font-semibold text-primary mb-4 border-l-4 border-accent pl-4">
+              {section.category}
+            </h2>
+            <ul class="space-y-3">
+              {section.items.map((item) => (
+                <li class="flex items-start gap-3 text-gray-700">
+                  <span class="text-accent text-xl flex-shrink-0 mt-1">✓</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+
+        <!-- Additional Tips -->
+        <div class="mt-10 p-6 bg-background rounded-lg border-l-4 border-accent">
+          <h3 class="text-xl font-semibold text-primary mb-3">💡 Pro Tips</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li>• Less is more – remove items when in doubt</li>
+            <li>• Think about how you would present your home to a buyer walking through</li>
+            <li>• Fresh flowers can add a welcoming touch to key rooms</li>
+            <li>• Consider hiring a professional cleaning service before the shoot</li>
+            <li>• Good preparation directly translates to better photos and faster sales</li>
+          </ul>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="mt-10 text-center p-6 bg-primary text-background rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">Questions About Preparation?</h3>
+          <p class="mb-4">We're here to help ensure your shoot goes smoothly</p>
+          <a 
+            href="https://book.avionnephotography.com" 
+            class="inline-block bg-accent text-primary px-8 py-3 rounded font-semibold hover:bg-opacity-90 transition-all duration-300"
+          >
+            Contact Us or Book Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Back to Home -->
+      <div class="text-center">
+        <a 
+          href="/"
+          class="text-primary hover:text-accent transition-colors duration-300 font-semibold"
+        >
+          ← Back to Home
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  // PDF Generation using jsPDF
+  document.getElementById('download-pdf-btn')?.addEventListener('click', async () => {
+    // Dynamic import of jsPDF
+    const { jsPDF } = await import('jspdf');
+    const doc = new jsPDF();
+    
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const margin = 20;
+    let yPosition = 20;
+    
+    // Header
+    doc.setFontSize(24);
+    doc.setTextColor(44, 53, 57); // primary color
+    doc.text('AVIONNE', margin, yPosition);
+    
+    yPosition += 8;
+    doc.setFontSize(14);
+    doc.setTextColor(201, 169, 97); // accent color
+    doc.text('Property Preparation Checklist', margin, yPosition);
+    
+    yPosition += 15;
+    doc.setDrawColor(201, 169, 97);
+    doc.line(margin, yPosition, pageWidth - margin, yPosition);
+    yPosition += 10;
+
+    const checklistItems = [
+      {
+        category: "Interior Preparation",
+        items: [
+          "Turn on all lights in every room",
+          "Open all curtains and blinds",
+          "Remove personal items from surfaces",
+          "Hide trash cans and pet items",
+          "Make all beds with fresh linens",
+          "Remove refrigerator magnets and photos",
+          "Clear kitchen and bathroom counters",
+          "Hide electrical cords when possible",
+          "Remove small area rugs if needed",
+          "Ensure toilets are closed"
+        ]
+      },
+      {
+        category: "Exterior Preparation",
+        items: [
+          "Mow lawn and edge walkways",
+          "Trim bushes and trees",
+          "Remove outdoor toys and tools",
+          "Clean or hide trash bins",
+          "Sweep porches and patios",
+          "Remove cars from driveway",
+          "Power wash if needed",
+          "Clean pool area",
+          "Remove seasonal decorations",
+          "Clean house numbers"
+        ]
+      },
+      {
+        category: "Day of Shoot",
+        items: [
+          "Complete prep 30 min before arrival",
+          "Turn on all lights",
+          "Adjust thermostat",
+          "Turn off ceiling fans",
+          "Turn off TVs and monitors",
+          "Close toilet lids",
+          "Arrange furniture for clear paths",
+          "Remove pets from property",
+          "Have keys ready",
+          "Be available by phone"
+        ]
+      },
+      {
+        category: "Special Considerations",
+        items: [
+          "Twilight: ensure exterior lights work",
+          "Drone: clear property boundaries",
+          "Video: minimize noise",
+          "Virtual staging: empty rooms",
+          "Notify of any hazards"
+        ]
+      }
+    ];
+
+    doc.setFontSize(10);
+    doc.setTextColor(100, 100, 100);
+
+    for (const section of checklistItems) {
+      // Check if we need a new page
+      if (yPosition > 250) {
+        doc.addPage();
+        yPosition = 20;
+      }
+
+      // Section header
+      doc.setFontSize(14);
+      doc.setTextColor(44, 53, 57);
+      doc.text(section.category, margin, yPosition);
+      yPosition += 8;
+
+      // Items
+      doc.setFontSize(10);
+      doc.setTextColor(80, 80, 80);
+      
+      for (const item of section.items) {
+        if (yPosition > 270) {
+          doc.addPage();
+          yPosition = 20;
+        }
+        
+        doc.text('✓', margin, yPosition);
+        const lines = doc.splitTextToSize(item, pageWidth - margin - 30);
+        doc.text(lines, margin + 8, yPosition);
+        yPosition += 6 * lines.length;
+      }
+      
+      yPosition += 5;
+    }
+
+    // Footer on last page
+    if (yPosition > 250) {
+      doc.addPage();
+      yPosition = 20;
+    }
+    
+    yPosition += 10;
+    doc.setFontSize(12);
+    doc.setTextColor(201, 169, 97);
+    doc.text('Questions? Contact us at book.avionnephotography.com', margin, yPosition);
+    
+    // Save the PDF
+    doc.save('avionne-photography-prep-checklist.pdf');
+  });
+</script>
+
+<style>
+  @media print {
+    header, footer, button {
+      display: none !important;
+    }
+    
+    #checklist-content {
+      box-shadow: none !important;
+    }
+  }
+</style>

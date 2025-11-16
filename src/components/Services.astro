@@ -1,0 +1,100 @@
+---
+const services = [
+  {
+    title: "Professional Photography",
+    description: "High-quality interior and exterior shots that showcase every property's finest features",
+    icon: "📸"
+  },
+  {
+    title: "Aerial Drone Photography",
+    description: "Stunning aerial perspectives that capture property grounds and neighborhood context",
+    icon: "🚁"
+  },
+  {
+    title: "Video Walkthroughs",
+    description: "Cinematic video tours that bring properties to life for remote buyers",
+    icon: "🎥"
+  },
+  {
+    title: "Drone Video",
+    description: "Dynamic aerial videography showcasing property surroundings and unique features",
+    icon: "📹"
+  },
+  {
+    title: "Twilight Photography",
+    description: "Dramatic golden hour and twilight shots that create unforgettable first impressions",
+    icon: "🌅"
+  },
+  {
+    title: "Matterport 3D Tours",
+    description: "Immersive 3D virtual tours that let buyers explore every inch remotely",
+    icon: "🏠"
+  },
+  {
+    title: "Zillow 3D Tours",
+    description: "Seamless integration with Zillow's platform for maximum listing visibility",
+    icon: "📱"
+  },
+  {
+    title: "Virtual Staging",
+    description: "Transform empty spaces into beautifully furnished rooms that help buyers envision home",
+    icon: "🛋️"
+  },
+  {
+    title: "Virtual Twilight",
+    description: "Convert daytime photos into stunning twilight imagery cost-effectively",
+    icon: "🌆"
+  },
+  {
+    title: "Social Media Reels",
+    description: "Engaging short-form video content optimized for Instagram and social platforms",
+    icon: "📲"
+  },
+  {
+    title: "Floor Plans",
+    description: "Professional floor plan illustrations that help buyers understand property layout",
+    icon: "📐"
+  },
+  {
+    title: "Agent Intro Voiceovers",
+    description: "Professional narration for video tours featuring agent introductions",
+    icon: "🎙️"
+  }
+];
+---
+
+<section id="services" class="py-20 px-6 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-light text-primary mb-4">
+        Comprehensive Services
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Everything you need to market luxury properties effectively
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {services.map((service) => (
+        <div class="bg-background p-6 rounded-lg border-l-4 border-accent hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div class="text-4xl mb-4">{service.icon}</div>
+          <h3 class="text-xl font-semibold text-primary mb-2">
+            {service.title}
+          </h3>
+          <p class="text-gray-600">
+            {service.description}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center mt-12">
+      <a 
+        href="https://book.avionnephotography.com" 
+        class="inline-block bg-accent text-primary px-10 py-4 rounded text-lg font-semibold hover:bg-opacity-90 transition-all duration-300 hover:scale-105 shadow-lg"
+      >
+        View Pricing & Book Now
+      </a>
+    </div>
+  </div>
+</section>
