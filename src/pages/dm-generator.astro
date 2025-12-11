@@ -1,0 +1,406 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="DM Generator - Admin Tool | Avionne Photography"
+  description="Internal tool for generating personalized Instagram follow-up messages"
+>
+  <main class="min-h-screen bg-background py-12 px-6">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-light text-primary mb-2">
+          Instagram DM Generator
+        </h1>
+        <p class="text-gray-600">
+          Admin Tool - Generate personalized follow-up messages
+        </p>
+      </div>
+
+      <!-- Generator Form -->
+      <div class="bg-white rounded-lg shadow-lg p-8 mb-6">
+        <div class="space-y-6">
+          <!-- Agent Name Input -->
+          <div>
+            <label for="agent-name" class="block text-sm font-semibold text-primary mb-2">
+              Agent Name *
+            </label>
+            <input 
+              type="text" 
+              id="agent-name" 
+              placeholder="Enter agent's first name"
+              class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-accent transition-colors"
+            />
+          </div>
+
+          <!-- Service Offer Selection -->
+          <div>
+            <label class="block text-sm font-semibold text-primary mb-3">
+              Add-On Service Offer *
+            </label>
+            <div class="space-y-3">
+              <label class="flex items-center p-4 border-2 border-gray-200 rounded cursor-pointer hover:border-accent transition-colors">
+                <input 
+                  type="radio" 
+                  name="service" 
+                  value="none" 
+                  class="mr-3 w-4 h-4 text-accent"
+                  checked
+                />
+                <div>
+                  <div class="font-semibold text-primary">None - General Follow-up</div>
+                  <div class="text-sm text-gray-600">Simple check-in without specific offer</div>
+                </div>
+              </label>
+
+              <label class="flex items-center p-4 border-2 border-gray-200 rounded cursor-pointer hover:border-accent transition-colors">
+                <input 
+                  type="radio" 
+                  name="service" 
+                  value="floorplan" 
+                  class="mr-3 w-4 h-4 text-accent"
+                />
+                <div>
+                  <div class="font-semibold text-primary">Floor Plan</div>
+                  <div class="text-sm text-gray-600">Include complimentary floor plan with order</div>
+                </div>
+              </label>
+
+              <label class="flex items-center p-4 border-2 border-gray-200 rounded cursor-pointer hover:border-accent transition-colors">
+                <input 
+                  type="radio" 
+                  name="service" 
+                  value="3dtour" 
+                  class="mr-3 w-4 h-4 text-accent"
+                />
+                <div>
+                  <div class="font-semibold text-primary">3D Tour</div>
+                  <div class="text-sm text-gray-600">Add 360° virtual tour to the offer</div>
+                </div>
+              </label>
+
+              <label class="flex items-center p-4 border-2 border-gray-200 rounded cursor-pointer hover:border-accent transition-colors">
+                <input 
+                  type="radio" 
+                  name="service" 
+                  value="drone" 
+                  class="mr-3 w-4 h-4 text-accent"
+                />
+                <div>
+                  <div class="font-semibold text-primary">Drone Photos</div>
+                  <div class="text-sm text-gray-600">Include aerial drone photography</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Generate Button -->
+          <button 
+            id="generate-btn"
+            class="w-full bg-accent text-primary px-8 py-4 rounded text-lg font-semibold hover:bg-opacity-90 transition-all duration-300 hover:scale-105 shadow-lg"
+          >
+            Generate Message
+          </button>
+        </div>
+      </div>
+
+      <!-- Output Section -->
+      <div id="output-section" class="bg-primary text-background rounded-lg shadow-lg p-8 hidden">
+        <div class="flex justify-between items-start mb-4">
+          <h2 class="text-2xl font-semibold text-accent">Generated Message</h2>
+          <button 
+            id="copy-btn"
+            class="bg-accent text-primary px-6 py-2 rounded font-semibold hover:bg-opacity-90 transition-all duration-300 flex items-center gap-2"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            Copy
+          </button>
+        </div>
+        
+        <div 
+          id="generated-message"
+          class="bg-white bg-opacity-10 rounded p-6 mb-4 min-h-[200px] text-background whitespace-pre-wrap leading-relaxed"
+        >
+          <!-- Generated message will appear here -->
+        </div>
+
+        <div id="copy-success" class="hidden text-accent font-semibold text-center">
+          ✓ Copied to clipboard!
+        </div>
+      </div>
+
+      <!-- Back to Home -->
+      <div class="text-center mt-8">
+        <a 
+          href="/"
+          class="text-primary hover:text-accent transition-colors duration-300 font-semibold"
+        >
+          ← Back to Home
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  // Enhanced message snippets with psychological motivation
+  const snippets = {
+    intro: [
+      // Friendly & Conversational
+      "Hey [Name]!👋 just wanted to pop in here to let you know that",
+      "Hey [Name]!!😊 Just wanted to come back here to let you know that",
+      "Hii [Name]🙌 hope you're having a great day!! I'm reaching out to let you know that",
+      "Hello [Name]🙌 I just wanted to reach out to let you know that",
+      "Hellloooo [Name]!!🙌 Just wanted to let you know that",
+      
+      // Value-focused
+      "Hey [Name]! 😊 I was thinking about you and wanted to make sure you knew that",
+      "Hi [Name]!👋 Just wanted to circle back because I think you'd really benefit from knowing that",
+      "Hey [Name]!!🙌 I know your time is valuable, so I'll keep this quick -",
+      
+      // Creating curiosity
+      "[Name]! 👋 I had to reach out because",
+      "Hey [Name]!😊 You crossed my mind today and I realized",
+      "Hi [Name]! Quick update I wanted to share with you -",
+      
+      // Building connection
+      "Hey [Name]!🙌 I've been thinking about your listings and wanted you to know",
+      "[Name]!!👋 I hope this message finds you crushing it in the market! Just wanted to mention that",
+      "Hi [Name]!😊 Wanted to check in and let you know",
+      
+      // Genuine & supportive
+      "Hey [Name]! Hope you're doing well!😊 I wanted to reach out because",
+      "[Name]!👋 I know how busy things get, so I wanted to make sure you didn't miss that",
+    ],
+    
+    neverExpires: [
+      // No pressure, evergreen
+      "this offer never expires, and I am super excited to get to shoot for you sometime!",
+      "this offer never expires, and I'm really excited to collaborate and work with you!",
+      "this offer will never expire and I'd absolutely love to work with you!!",
+      "this offer has no expiration, so we can plan it whenever works best for you!",
+      "this offer is up unlimited time, and its completely free!",
+      
+      // Flexibility & convenience
+      "this offer is always available whenever your schedule allows - no rush at all!",
+      "there's zero time pressure on this offer, so you can book whenever feels right!",
+      "this offer stays open indefinitely because I want this to work around YOUR timeline!",
+      "you can take advantage of this anytime that works for you - seriously, no expiration!",
+      
+      // Exclusivity & value
+      "I'm keeping this offer open just for you - no deadlines, no pressure!",
+      "this is an exclusive offer that doesn't expire, and I'm genuinely excited to work with you!",
+      "I want to make sure you have this available whenever you need it - it never expires!",
+      
+      // Relationship building
+      "I'm hoping we can work together whenever the timing is right for you!",
+      "I'd love to be your go-to photographer, so this offer is always on the table!",
+      "I want to earn your business when you're ready, so there's no expiration on this!",
+      
+      // Removing objections
+      "seriously, no catches and no expiration - just want to show you what I can do!",
+      "this stays open because I believe once you see my work, you'll want to keep working together!",
+    ],
+    
+    floorplan: [
+      // Value proposition
+      "I'm starting to include floor plans with my orders, and I'd be really excited to add one to yours!",
+      "I'm now offering floor plans, and I'd be thrilled to include one in this offer!",
+      "floor plans are now part of my orders, and I'd be happy to include it with this offer.",
+      "I'd be really excited to include a floor plan with this offer.",
+      
+      // Competitive advantage
+      "I just added professional floor plans to my service, and it's been a game-changer for my agents!",
+      "I'm including floor plans now (most photographers charge $50-100 extra for these!) and I'd love to add one to your shoot!",
+      "Floor plans are proven to increase buyer engagement, and I'd love to include one with your shoot at no extra cost!",
+      
+      // Social proof & results
+      "My agents have been loving the floor plans I'm including now - buyers request them constantly!",
+      "The floor plans I'm adding have been getting amazing feedback from both agents and buyers!",
+      
+      // Making it personal
+      "I know how much buyers appreciate floor plans, so I'd love to include one for your listing!",
+      "Since floor plans help properties stand out online, I'd be excited to create one for you!",
+      "I want your listings to have every advantage, so I'd love to add a professional floor plan!",
+    ],
+    
+    tour3d: [
+      // New capability excitement
+      "I just got my 360 camera and would totally love to add a 3D tour to my offer!",
+      "I just bought my 3D tour camera to help your listing look even better - and get ranked higher in Zillow!",
+      "my 3D tour camera just got here, and I'd absolutely love to add a tour to my offer.",
+      "I'm really excited to share that my new 360° tour camera is here! I'd love to include it in your next shoot (on me as part of the initial offer I made to you!",
+      
+      // SEO & ranking benefits
+      "I just got my 3D tour camera - listings with virtual tours get 87% more views and rank higher on Zillow!",
+      "My new 360° camera arrived! Virtual tours are proven to get more engagement and help properties sell faster.",
+      "3D tours are huge right now (Zillow prioritizes them in search!) and I'd love to include one with your shoot!",
+      
+      // Competitive edge
+      "Most agents in our area aren't offering 3D tours yet - I'd love to give your listings that competitive edge!",
+      "Virtual tours are becoming essential, and I'm excited to offer this to help your listings stand out!",
+      
+      // Buyer behavior
+      "Since 90% of buyers start their search online, a 3D tour would let them explore your property 24/7!",
+      "3D tours let serious buyers pre-qualify themselves before visiting - saves you time and attracts better leads!",
+      "Buyers love being able to walk through properties virtually - I'd be excited to add this to your listing!",
+      
+      // Investment in business
+      "I just invested in 3D tour technology because I want to offer the absolute best for your listings!",
+    ],
+    
+    drone: [
+      // Certification & professionalism
+      "I just got my drone license and would love to add drone photos to the offer!",
+      "I'm really excited - I just got my drone license and would absolutely love to include drone photos with this offer!",
+      "I just passed my drone license exam and I'm now a certified drone pilot - I'd love to add drone photos to the offer!",
+      "I've officially passed the drone license exam, so I'd love to include drone photos in the offer!",
+      "after a few days of non-stop studying, I finally passed my drone license exam - and I'd love to add drone photos to my offer!",
+      
+      // Effort & dedication
+      "I'm officially FAA certified now after passing my Part 107 exam, and I'm excited to offer drone photos!",
+      "Just became a licensed drone pilot! I'd love to showcase your property from stunning aerial angles!",
+      "I put in the work to get properly licensed for drone photography - I'd love to include aerials with your shoot!",
+      
+      // Property showcase benefits
+      "Drone photos show the full property, lot size, and neighborhood - they're perfect for your listings!",
+      "Aerial shots really help buyers understand the property's full context and nearby amenities!",
+      "Drone photography has been a game-changer for showcasing properties - I'd love to add it to your shoot!",
+      
+      // Market advantage
+      "Listings with drone photos get 68% more online views - I'd love to include these with your shoot!",
+      "Aerial photography helps luxury and larger properties really stand out in the market!",
+      "Drone shots show your property's best features from angles ground photos just can't capture!",
+      
+      // Exclusivity
+      "Not many photographers in our area are properly licensed for drone work - I'd love to offer this to you!",
+    ],
+    
+    outro: [
+      // Low pressure
+      "Also, no need to reply - I know you're busy! I'll touch base again soon. And feel free to message me anytime!",
+      "No need to reply - just wanted to send this your way!",
+      "Also, feel free to reach out anytime - no need to respond now I know you are busy!",
+      "Feel free to message me anytime! I'll circle back soon - I know IG tends to hide messages sometimes!",
+      
+      // Creating openness
+      "Just wanted to keep you in the loop! No pressure to respond, but my calendar is open whenever you are!",
+      "I know your inbox is probably crazy, so no worries if you can't reply! Just wanted you to have this info!",
+      "Zero pressure to respond - just wanted to make sure you had this offer top of mind for when you need it!",
+      
+      // Offering value
+      "Feel free to reach out with any questions! I'm here to make your listings look incredible!",
+      "I'm always happy to chat about what would work best for your specific listings!",
+      "Let me know if you'd like to see my portfolio or learn more about how I can help your listings shine!",
+      
+      // Building relationship
+      "Looking forward to working with you whenever the timing is right!",
+      "I'm excited to support your success whenever you need me!",
+      "Can't wait to help showcase your amazing listings!",
+      
+      // Staying top of mind
+      "I'll check back in a bit - just want to make sure I'm on your radar when you need great photos!",
+      "I'll touch base again soon! In the meantime, feel free to message me if anything comes up!",
+      "Keeping you updated! Reach out anytime you need photography - I respond fast!",
+      
+      // Removing barriers
+      "No pressure at all! Just bookmark this for when you have a listing that needs amazing photos!",
+      "I'll follow up later, but seriously - message me anytime! I'm super responsive and flexible!",
+      "Talk soon! And seriously, my schedule is flexible so we can make it work whenever you need!",
+    ]
+  };
+
+  // Helper function to get random item from array
+  function getRandomItem(array) {
+    return array[Math.floor(Math.random() * array.length)];
+  }
+
+  // Generate message
+  function generateMessage() {
+    const agentName = document.getElementById('agent-name').value.trim();
+    
+    if (!agentName) {
+      alert('Please enter the agent\'s name!');
+      return;
+    }
+
+    const selectedService = document.querySelector('input[name="service"]:checked').value;
+    
+    // Get random snippets
+    const intro = getRandomItem(snippets.intro).replace('[Name]', agentName);
+    const neverExpires = getRandomItem(snippets.neverExpires);
+    
+    let serviceOffer = '';
+    if (selectedService === 'floorplan') {
+      serviceOffer = getRandomItem(snippets.floorplan);
+    } else if (selectedService === '3dtour') {
+      serviceOffer = getRandomItem(snippets.tour3d);
+    } else if (selectedService === 'drone') {
+      serviceOffer = getRandomItem(snippets.drone);
+    }
+    // If 'none' is selected, serviceOffer stays empty
+    
+    const outro = getRandomItem(snippets.outro);
+    
+    // Combine all parts - only add service offer if it exists
+    let message = `${intro} ${neverExpires}`;
+    if (serviceOffer) {
+      message += ` ${serviceOffer}`;
+    }
+    message += ` ${outro}`;
+    
+    // Display the message
+    document.getElementById('generated-message').textContent = message;
+    document.getElementById('output-section').classList.remove('hidden');
+    document.getElementById('copy-success').classList.add('hidden');
+    
+    // Scroll to output
+    document.getElementById('output-section').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Copy to clipboard
+  async function copyToClipboard() {
+    const message = document.getElementById('generated-message').textContent;
+    
+    try {
+      await navigator.clipboard.writeText(message);
+      
+      // Show success message
+      const successMsg = document.getElementById('copy-success');
+      successMsg.classList.remove('hidden');
+      
+      // Hide after 2 seconds
+      setTimeout(() => {
+        successMsg.classList.add('hidden');
+      }, 2000);
+    } catch (err) {
+      // Fallback for older browsers
+      const textarea = document.createElement('textarea');
+      textarea.value = message;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      
+      const successMsg = document.getElementById('copy-success');
+      successMsg.classList.remove('hidden');
+      setTimeout(() => {
+        successMsg.classList.add('hidden');
+      }, 2000);
+    }
+  }
+
+  // Event listeners
+  document.getElementById('generate-btn')?.addEventListener('click', generateMessage);
+  document.getElementById('copy-btn')?.addEventListener('click', copyToClipboard);
+
+  // Allow Enter key to generate
+  document.getElementById('agent-name')?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      generateMessage();
+    }
+  });
+</script>
